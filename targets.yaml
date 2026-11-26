@@ -1,0 +1,140 @@
+# Where /job-search looks for jobs and what it keeps.
+# Only public ATS career boards (Greenhouse, Lever, Ashby). No LinkedIn.
+#
+# To add a company, find its board URL:
+#   job-boards.greenhouse.io/<slug>   -> ats: greenhouse
+#   jobs.lever.co/<slug>              -> ats: lever
+#   jobs.ashbyhq.com/<slug>           -> ats: ashby
+# All slugs below were verified to respond on 2026-11-25.
+
+companies:
+  # --- AI labs / AI-native ---
+  - {name: Anthropic,   ats: greenhouse, slug: anthropic}
+  - {name: OpenAI,      ats: ashby,      slug: openai}
+  - {name: Cohere,      ats: ashby,      slug: cohere}
+  - {name: Perplexity,  ats: ashby,      slug: perplexity}
+  - {name: Sarvam AI,   ats: ashby,      slug: sarvam}
+  - {name: LangChain,   ats: ashby,      slug: langchain}
+  - {name: ElevenLabs,  ats: ashby,      slug: elevenlabs}
+  - {name: Modal,       ats: ashby,      slug: modal}
+  - {name: Pinecone,    ats: ashby,      slug: pinecone}
+  - {name: Together AI, ats: greenhouse, slug: togetherai}
+  - {name: Scale AI,    ats: greenhouse, slug: scaleai}
+  - {name: Glean,       ats: greenhouse, slug: gleanwork}
+  - {name: Databricks,  ats: greenhouse, slug: databricks}
+  - {name: Replit,      ats: ashby,      slug: replit}
+  # --- Product / dev-tools ---
+  - {name: Notion,      ats: ashby,      slug: notion}
+  - {name: Linear,      ats: ashby,      slug: linear}
+  - {name: Ramp,        ats: ashby,      slug: ramp}
+  - {name: Figma,       ats: greenhouse, slug: figma}
+  - {name: Stripe,      ats: greenhouse, slug: stripe}
+  - {name: Samsara,     ats: greenhouse, slug: samsara}
+  - {name: Palantir,    ats: lever,      slug: palantir}
+  # --- India ---
+  - {name: Razorpay,    ats: greenhouse, slug: razorpaysoftwareprivatelimited}
+  - {name: CRED,        ats: lever,      slug: cred}
+  - {name: Meesho,      ats: lever,      slug: meesho}
+  - {name: Zeta,        ats: lever,      slug: zeta}
+  - {name: Paytm,       ats: lever,      slug: paytm}
+
+filters:
+  # Title must contain at least one of these tech-role words (case-insensitive, whole word).
+  # Seniority is NOT filtered here except via title_exclude; triage judges years-of-experience.
+  title_include:
+    - engineer
+    - engineering
+    - developer
+    - software
+    - sde
+    - swe
+    - machine learning
+    - ml
+    - ai
+    - llm
+    - research
+    - scientist
+    - data
+    - backend
+    - full stack
+    - fullstack
+    - applied
+  # Titles containing any of these are dropped.
+  title_exclude:
+    # seniority
+    - senior
+    - sr
+    - staff
+    - principal
+    - lead
+    - manager
+    - director
+    - head
+    - architect
+    - vp
+    - ii
+    - iii
+    - iv
+    - distinguished
+    - sde2
+    - sde3
+    - sde 2
+    - sde 3
+    - sde-2
+    - sde-3
+    - engineer 2
+    - engineer 3
+    - founding
+    - phd
+    # non-engineering
+    - recruiter
+    - talent
+    - hr
+    - sales
+    - seller
+    - account executive
+    - marketing
+    - counsel
+    - legal
+    - finance
+    - accountant
+    - designer
+    - design
+    - product management
+    - product manager
+    - customer experience
+    - support engineer
+    - technical support
+    - strategist
+    - transformation
+    - policy
+    - medical
+    - economist
+    - industry executive
+    - risk
+  # Location rules:
+  #  1. keep if location text mentions any india_locations
+  #  2. keep a remote role only if it says remote_ok (worldwide/anywhere/APAC...)
+  #     or names no place at all ("Remote")
+  #  3. drop everything else
+  india_locations:
+    - india
+    - bengaluru
+    - bangalore
+    - delhi
+    - new delhi
+    - ncr
+    - gurugram
+    - gurgaon
+    - noida
+    - faridabad
+    - hyderabad
+    - pune
+    - mumbai
+    - chennai
+  remote_ok:
+    - anywhere
+    - worldwide
+    - global
+    - apac
+    - asia
