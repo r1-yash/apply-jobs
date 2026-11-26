@@ -1,0 +1,82 @@
+# Template for facts.yaml (the real file is gitignored).
+#   cp facts.example.yaml facts.yaml   then fill it in from your resume.
+#
+# facts.yaml is the ONLY source of truth about you.
+# /job-search may only claim things written here (or in your resume).
+# Any null = unknown -> the skill must STOP and ASK, never guess.
+
+profile:
+  name: Your Name
+  email: you@example.com
+  phone: "+00-0000000000"
+  linkedin: linkedin.com/in/your-handle
+  github: github.com/your-handle
+  current_location: null          # e.g. "Delhi NCR, India"
+
+education:
+  - school: Your University
+    degree: B.Tech in Computer Science
+    start: 2023
+    end: 2027
+    cgpa: null
+    graduation_month: null        # e.g. "May-June 2027"
+
+experience:
+  - company: Company Name
+    title: Software Engineering Intern
+    location: City, Country
+    start: January 2026
+    end: April 2026
+    bullets:
+      - "Copy each resume bullet verbatim, with real numbers only."
+
+# Total professional experience. Never round up.
+total_experience_months: 0
+
+projects:
+  - name: Project Name
+    tagline: One-line description
+    stack: [Python]
+    bullets:
+      - "Copy each resume bullet verbatim."
+
+skills:
+  languages: []
+  backend: []
+  frontend: []
+  cloud_devops: []
+  databases: []
+  core: []
+
+# Skills you do NOT have, so they are never claimed.
+not_skills: []
+
+achievements: []
+
+# Answers to common application-form questions. null = ask first.
+answers:
+  citizenship: null
+  authorized_to_work_india: null
+  authorized_to_work_us: null
+  needs_visa_sponsorship: null
+  willing_to_relocate: null
+  open_to: null                     # e.g. [remote, hybrid, onsite]
+  internship_available_from: null
+  internship_duration_months: null
+  fulltime_available_from: null
+  notice_period: null
+  expected_stipend_inr_per_month: null
+  expected_salary_inr_lpa: null
+  expected_salary_usd: null
+  pronouns: null
+  gender: null
+  eeo_decline: null
+  how_did_you_hear: null
+  can_work_overlapping_us_hours: null
+
+# Stage 3 settings. Keep auto_submit false until you explicitly want it.
+apply_policy:
+  auto_submit: false
+  daily_submit_cap: 5
+  only_verdict: apply
+  submission_log: submissions.log
