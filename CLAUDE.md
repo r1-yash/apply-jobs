@@ -4,8 +4,8 @@ Yash Singhal's personal job-search automation. Yash is a B.Tech CS (AI & ML) stu
 
 ## Build status (staged; don't skip ahead)
 1. **Triage**: done. `find`, `triage`, `status` work and were tested on 34 real JDs.
-2. **Prepare**: next. Tailored resume as **PDF only** (never hand over markdown or `.tex`), compiled with `tectonic` from `resume/yash.tex`, plus drafted form answers.
-3. **Form-fill**: later. Uses Chrome via the claude-in-chrome skill and **stops before submit**.
+2. **Prepare**: built and tested on the two Stripe roles, awaiting Yash's review. `scripts/build_resume.py` fact-checks the tailored `.tex` against `resume/yash.tex` and `facts.yaml`, then compiles a one-page **PDF**. `answers.md` is drafted alongside it.
+3. **Form-fill**: next, after review. Uses Chrome via the claude-in-chrome skill and **stops before submit**.
 
 Don't start a stage until Yash has reviewed the previous one on real JDs.
 
@@ -33,6 +33,7 @@ Don't start a stage until Yash has reviewed the previous one on real JDs.
 | `resume/yash.tex` | LaTeX source for tailoring. Never edit the original; write tailored copies per job. |
 | `scripts/fetch_jobs.py` | Python stdlib + PyYAML. Pulls from the public ATS JSON APIs, filters, and dedupes against the tracker. |
 | `scripts/tracker.py` | `list [--status/--verdict]`, `set <job_id> k=v…` (validated), `summary`. |
+| `scripts/build_resume.py` | `<job_id> [--check-only]`. Fact-checks `jobs/<id>/resume.tex`, then builds `Yash_Singhal_Resume.pdf` (must be 1 page). |
 
 ## Commands
 ```bash
@@ -50,3 +51,6 @@ tectonic <file>.tex          # LaTeX -> PDF
 - The title filter can't tell levels apart, so most jobs that pass it are mid/senior. Triage does the real filtering, mostly on years of experience.
 - Verdicts: `apply` / `stretch` / `skip`. Statuses run found → triaged → prepared → filled → submitted, or skipped.
 - When triaging more than 5 jobs with subagents, give each agent an explicit list of job IDs. Never send a template placeholder.
+- **One page is a hard requirement** (Yash), for both the master `resume/yash.tex` and every tailored PDF. `build_resume.py` exits non-zero when a resume runs over a page. If an edit to the master pushes it over, fix it with layout only (section spacing, margins, line spread), never by cutting content without asking. The 2026-11-26 fix was section spacing 6pt/5pt → 5pt/4pt; the pre-fix copy is `resume/yash.before-onepage.tex`.
+- The fact-checker can't judge meaning. Rewording shows up as WARN and needs a human-level read. Numbers are pinned to their original bullet, and new leadership/scale words are errors.
+- No PDF library is installed. The page count comes from tectonic's log (`Output written on … (N pages)`).

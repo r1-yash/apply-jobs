@@ -105,11 +105,36 @@ When done, run `python3 scripts/tracker.py summary` and show the table. Then lis
 ## Mode: `status`
 Run `python3 scripts/tracker.py summary`.
 
-## Mode: `prepare <job_id>` (Stage 2, NOT BUILT YET)
-Reply: "Stage 2 (tailored resume PDF + drafted answers) is not built yet." Planned design:
-- Start from Yash's LaTeX source in `resume/` and compile it to a PDF with `tectonic`. Output is always a PDF, never markdown or `.tex`.
-- Reorder and reword only true bullets. Draft `answers.md` from `facts.yaml`.
-- Only for jobs with a verdict of apply or stretch.
+## Mode: `prepare <job_id>` (Stage 2)
+Only for jobs whose verdict is **apply** or **stretch**. Otherwise, say so and stop.
+
+1. Read `resume/yash.tex` (never edit it), `facts.yaml`, and the job's `jd.md` and `triage.md`. The "Tailoring hooks" section of `triage.md` says what to lead with.
+2. Write `jobs/<job_id>/resume.tex` as a copy of `yash.tex`. **Allowed changes:**
+   - Reorder sections, projects, bullets, skill rows, and the skills within a row, so the most relevant come first.
+   - Drop the least relevant bullets to stay on one page.
+   - Light rewording of a bullet using JD vocabulary, only where the original already says the same thing.
+   - Layout tweaks: margins, spacing, the table column spec.
+
+   **Not allowed:**
+   - Changing the header or EDUCATION.
+   - Adding bullets, numbers, tools, skills, links, or claims of leadership, scale or impact.
+   - Moving a number into a different bullet.
+
+   Prefer copying exact lines from `yash.tex` over retyping them.
+3. Run `python3 scripts/build_resume.py <job_id>`. This fact-checks the `.tex` against `yash.tex` and `facts.yaml`, then compiles it to `jobs/<job_id>/Yash_Singhal_Resume.pdf`.
+   - **ERROR:** fix the `.tex`, never the checker. If a flagged item is genuinely true but missing from the facts, ask Yash, add it to `facts.yaml`, then rerun.
+   - **WARN** (new wording): read every word yourself and confirm the meaning hasn't changed.
+   - **Not 1 page:** tighten the layout or drop a low-relevance bullet.
+4. Read the PDF to check it visually.
+5. Write `jobs/<job_id>/answers.md`. It holds:
+   - a table of likely form fields, each with an answer and its `facts.yaml` source
+   - **ASK** for every null field (never fill those in)
+   - optionally, a short free-text draft (why-this-company) built only from resume facts
+
+   Re-read the draft against the resume; it's easy to overstate there.
+6. Run `python3 scripts/tracker.py set <job_id> status=prepared`. Then show Yash where the PDF is, a summary of what was reordered or dropped and why, and the list of ASK fields. After he answers, save the answers to `facts.yaml > answers`.
+
+The deliverable is always the PDF. Never hand Yash markdown or `.tex` as the resume. **It must be exactly one page.** This is non-negotiable for Yash.
 
 ## Mode: `apply <job_id>` (Stage 3, NOT BUILT YET)
 Reply: "Stage 3 (Chrome form-fill) is not built yet." Planned design:
