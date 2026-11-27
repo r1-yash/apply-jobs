@@ -1,11 +1,11 @@
 # Job Apply script
 
-Yash Singhal's personal job-search automation. Yash is a B.Tech CS (AI & ML) student at Bennett University, graduating May–June 2027. The project finds internship and new-grad AI/ML/SWE roles (India or global remote), triages each one, tailors a resume PDF for it, and fills in applications. It's driven by the `/job-search` skill: `.claude/skills/job-search/SKILL.md` holds the triage rubric and the modes.
+Yash Singhal's personal job-search automation. Yash is a B.Tech CS (AI & ML) student at Bennett University, graduating May–June 2027. The project finds internship and new-grad developer/SWE, analyst and AI/ML roles (India or global remote), triages each one, tailors a resume PDF for it, and fills in applications. It's driven by the `/job-search` skill: `.claude/skills/job-search/SKILL.md` holds the triage rubric and the modes.
 
 ## Build status (staged; don't skip ahead)
 1. **Triage**: done. `find`, `triage`, `status` work and were tested on 34 real JDs.
 2. **Prepare**: done. Yash reviewed and approved both Stripe PDFs on 2026-11-27. `scripts/build_resume.py` fact-checks the tailored `.tex` against `resume/yash.tex` and `facts.yaml`, then compiles a one-page **PDF**. `answers.md` is drafted alongside it.
-3. **Form-fill**: next. Uses Chrome via the claude-in-chrome skill and **stops before submit**.
+3. **Form-fill**: next, not started. Wait for Yash to say go. The first targets are the two prepared Stripe roles (`stripe__8031833` intern, `stripe__8130876` new grad). Uses Chrome via the claude-in-chrome skill and **stops before submit**.
 
 Don't start a stage until Yash has reviewed the previous one on real JDs.
 
@@ -51,7 +51,7 @@ tectonic <file>.tex          # LaTeX -> PDF
 ## Gotchas
 - Ashby returns 403 without a browser-like `User-Agent`. `fetch_jobs.py` sets one.
 - Greenhouse HTML arrives double-escaped. `html_to_text` unescapes it first.
-- Location filter: keep a job if the location names an India city. Keep a remote role only if it's worldwide, APAC, or a bare "Remote". US-only remote roles are dropped on purpose.
+- Location filter: keep a job if the location names an India city. Keep a remote role only if it's worldwide, APAC, or a bare "Remote". US-only remote roles are dropped on purpose. Onsite roles outside India would need visa sponsorship, so the filter stays India + global remote (Yash's decision, 2026-11-27). Don't widen it unless he asks.
 - The title filter can't tell levels apart, so most jobs that pass it are mid/senior. Triage does the real filtering, mostly on years of experience.
 - Verdicts: `apply` / `stretch` / `skip`. Statuses run found → triaged → prepared → filled → submitted, or skipped.
 - When triaging more than 5 jobs with subagents, give each agent an explicit list of job IDs. Never send a template placeholder.
