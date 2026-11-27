@@ -6,6 +6,7 @@ tracker.csv
 tracker.csv.tmp
 jobs/
 submissions.log
+memory/
 
 # Python
 __pycache__/

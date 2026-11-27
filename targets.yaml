@@ -59,6 +59,7 @@ filters:
     - full stack
     - fullstack
     - applied
+    - analyst
   # Titles containing any of these are dropped.
   title_exclude:
     # seniority
@@ -86,6 +87,10 @@ filters:
     - engineer 3
     - founding
     - phd
+    # roles Yash does not want
+    - frontend
+    - front end
+    - front-end
     # non-engineering
     - recruiter
     - talent
