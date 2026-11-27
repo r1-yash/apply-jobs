@@ -4,8 +4,8 @@ Yash Singhal's personal job-search automation. Yash is a B.Tech CS (AI & ML) stu
 
 ## Build status (staged; don't skip ahead)
 1. **Triage**: done. `find`, `triage`, `status` work and were tested on 34 real JDs.
-2. **Prepare**: built and tested on the two Stripe roles, awaiting Yash's review. `scripts/build_resume.py` fact-checks the tailored `.tex` against `resume/yash.tex` and `facts.yaml`, then compiles a one-page **PDF**. `answers.md` is drafted alongside it.
-3. **Form-fill**: next, after review. Uses Chrome via the claude-in-chrome skill and **stops before submit**.
+2. **Prepare**: done. Yash reviewed and approved both Stripe PDFs on 2026-11-27. `scripts/build_resume.py` fact-checks the tailored `.tex` against `resume/yash.tex` and `facts.yaml`, then compiles a one-page **PDF**. `answers.md` is drafted alongside it.
+3. **Form-fill**: next. Uses Chrome via the claude-in-chrome skill and **stops before submit**.
 
 Don't start a stage until Yash has reviewed the previous one on real JDs.
 
